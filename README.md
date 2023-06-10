@@ -1,2 +1,2 @@
 # wall-app
-Multi-tier app to learn GKE
+Multi-tier app to learn GKE.
