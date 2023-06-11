@@ -1,2 +1,6 @@
 flask
+flask-api
 redis
+datetime
+requests
+uuid
