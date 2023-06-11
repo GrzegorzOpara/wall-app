@@ -32,10 +32,9 @@ def add():
    data = request.json
    record = {}
    record['backend'] = socket.gethostname()
-   record['frontend'] = request.headers.get('host')
+   record['frontend'] = request.headers.get('origin')
    record['timestamp'] = str(datetime.datetime.now())
    record['message'] = data.get('text')
-   print(record)
    try:
       key = 'posts:' + str(uuid.uuid4())
       r.hset(key, mapping=record)
