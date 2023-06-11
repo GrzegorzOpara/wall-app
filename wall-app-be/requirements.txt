@@ -4,3 +4,4 @@ redis
 datetime
 requests
 uuid
+flask_cors

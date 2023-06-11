@@ -1,0 +1,13 @@
+services:
+   redis: 
+     image: redis
+     container_name: wall-app-redis
+     ports:
+       - '6379:6379' 
+   flask:
+        build: ./wall-app-be/
+        container_name: wall-app-be
+        ports:
+            - "8080:8080"
+        depends_on:
+            - redis

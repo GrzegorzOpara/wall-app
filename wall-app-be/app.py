@@ -3,14 +3,16 @@ import socket
 import datetime
 import uuid
 import redis
+from flask_cors import CORS
 
 from flask_api import status
 from flask import Flask, request, jsonify
  
 app = Flask(__name__)
+CORS(app)
 
 # initiate redis
-r = redis.Redis(host='0.0.0.0', port=6379, decode_responses=True)
+r = redis.Redis(host='redis', port=6379, decode_responses=True)
 
  
 @app.route("/")
@@ -19,8 +21,9 @@ def get():
    try:
       for key in r.scan_iter("posts:*"):
          results[key] = (r.hgetall(key))  
-      print(results)     
-      return jsonify(results), status.HTTP_200_OK
+      print(results)
+      response = jsonify(results)
+      return response, status.HTTP_200_OK
    except:
       return "error", status.HTTP_400_BAD_REQUEST
  
