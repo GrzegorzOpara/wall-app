@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wall-app-be
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+        app: wall-app-be
+  template:
+    metadata:
+      labels:
+        app: wall-app-be
+    spec:
+      containers:
+      - name: wall-app-be
+        image: europe-west1-docker.pkg.dev/wall-app-390011/wall-app-repo/wall-app_flask
+        env:
+        - name: GET_HOSTS_FROM
+          value: "dns"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8080

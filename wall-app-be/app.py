@@ -4,10 +4,13 @@ import datetime
 import uuid
 import redis
 from flask_cors import CORS
+from dotenv import load_dotenv
 
 from flask_api import status
 from flask import Flask, request, jsonify
  
+load_dotenv()
+
 app = Flask(__name__)
 CORS(app)
 
@@ -43,5 +46,6 @@ def add():
       return "error", status.HTTP_400_BAD_REQUEST
 
 if __name__ == "__main__":
-   port = int(os.environ.get("PORT", 8080))
-   app.run(debug=True, host='0.0.0.0', port=port)
+   port = int(os.getenv('PORT'))
+   host = os.getenv('HOST')
+   app.run(debug=True, host=host, port=port)
