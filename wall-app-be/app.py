@@ -15,7 +15,7 @@ app = Flask(__name__)
 CORS(app)
 
 # initiate redis
-r = redis.Redis(host='redis', port=6379, decode_responses=True)
+r = redis.Redis(host=os.getenv('BE_REDIS_HOST'), port=int(os.getenv('BE_REDIS_PORT')), decode_responses=True)
 
  
 @app.route("/")
@@ -46,6 +46,6 @@ def add():
       return "error", status.HTTP_400_BAD_REQUEST
 
 if __name__ == "__main__":
-   port = int(os.getenv('PORT'))
-   host = os.getenv('HOST')
+   port = int(os.getenv('BE_PORT'))
+   host = os.getenv('BE_HOST')
    app.run(debug=True, host=host, port=port)

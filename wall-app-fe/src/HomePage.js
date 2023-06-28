@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 const HomePage = () => {
 
     let [posts, setPosts] = useState([])
@@ -7,7 +9,7 @@ const HomePage = () => {
     let addPost = async(e) => {
       e.preventDefault()
 
-      let response = await fetch('http://localhost:8080/add', {
+      let response = await fetch(REACT_APP_API_URL + '/add', {
         method: 'POST',
         headers: {
           'Content-Type':'application/json',
@@ -28,7 +30,7 @@ const HomePage = () => {
 
     let getPosts = async(e) => {
 
-      let response = await fetch('http://localhost:8080', {
+      let response = await fetch(REACT_APP_API_URL, {
         metchod: 'GET',
         headers: {
           'Content-Type':'application/json'
